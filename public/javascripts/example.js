@@ -15,6 +15,10 @@ var CommentBox = React.createClass({
     });
   },
   handleCommentSubmit: function(comment) {
+    // サーバにPOSTするよりも先にsetStateで設定してあげることでレスポンスが早く感じる
+    var comments = this.state.data;
+    this.setState({ data: comments.concat([comment]) });
+
     $.ajax({
       url: this.props.url,
       dataType: 'json',
@@ -22,7 +26,7 @@ var CommentBox = React.createClass({
       data: comment,
       success: function(data) {
         console.table(data);
-        this.setState({data: data})
+        this.setState({data: data});
       }.bind(this),
       error: function (xhr, status, err) {
         console.error(this.props.url, status, err.toString());
