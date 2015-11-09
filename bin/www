@@ -5,7 +5,7 @@
  */
 
 var app = require('../app');
-var debug = require('debug')('react-tutorial-example:server');
+var debug = require('debug')('react-practice:server');
 var http = require('http');
 
 /**
