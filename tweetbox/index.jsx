@@ -21,10 +21,10 @@ var TweetBox = React.createClass({
 
   overflowAlert: function() {
     if (this.remainingCharacters() < 0) {
-    baseSize = this.state.photoAdded ? 140-23 : 140;
+      var baseSize = this.state.photoAdded ? 140-23 : 140;
 
-    var beforeOverflowText = this.state.text.substring(baseSize - 10, 140);
-    var overflowText = this.state.text.substring(baseSize);
+      var beforeOverflowText = this.state.text.substring(baseSize - 10, 140);
+      var overflowText = this.state.text.substring(baseSize);
 
       return (
         <div className="alert alert-warning">
