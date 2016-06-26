@@ -2,64 +2,29 @@
 
 var _redux = require('redux');
 
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+var _reducers = require('./reducers');
 
-// Action Creators
-function addTodo(text) {
-  return { type: 'ADD_TODO', text: text };
-}
-function completeTodo(id) {
-  return { type: 'COMPLETE_TODO', id: id };
-}
+var _reducers2 = _interopRequireDefault(_reducers);
 
-function setVisibilityFilter(filter) {
-  return { type: 'SET_VISIBILITY_FILTER', filter: filter };
-}
+var _actions = require('./actions');
 
-// Reducer
-function todos() {
-  var state = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
-  var action = arguments[1];
+var actions = _interopRequireWildcard(_actions);
 
-  switch (action.type) {
-    case 'ADD_TODO':
-      return [].concat(_toConsumableArray(state), [{ text: action.text, completed: false }]);
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
-    case 'COMPLETE_TODO':
-      var tmp_state = [].concat(_toConsumableArray(state));
-      tmp_state[action.id].completed = true;
-      return tmp_state;
-
-    default:
-      return state;
-  }
-}
-
-function visibilityFilter() {
-  var state = arguments.length <= 0 || arguments[0] === undefined ? 'SHOW_ALL' : arguments[0];
-  var action = arguments[1];
-
-  switch (action.type) {
-    case 'SET_VISIBILITY_FILTER':
-      return action.filter;
-    default:
-      return state;
-  }
-}
-
-var todoApp = (0, _redux.combineReducers)({ todos: todos, visibilityFilter: visibilityFilter });
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var initialState = {
   visibilityFilter: 'SHOW_ALL',
   todos: [{ text: '原稿を書く', completed: true }, { text: '燃えるゴミを捨てる', completed: false }]
 };
-var store = (0, _redux.createStore)(todoApp, initialState);
+var store = (0, _redux.createStore)(_reducers2.default, initialState);
 store.subscribe(function () {
   return console.log(store.getState());
 });
 
 // Action 発行
-store.dispatch(addTodo('電球を替える'));
-store.dispatch(addTodo('公共料金払う'));
-store.dispatch(completeTodo(2));
-store.dispatch(setVisibilityFilter('SHOW_COMPLETED'));
+store.dispatch(actions.addTodo('電球を替える'));
+store.dispatch(actions.addTodo('公共料金払う'));
+store.dispatch(actions.completeTodo(2));
+store.dispatch(actions.setVisibilityFilter('SHOW_COMPLETED'));
