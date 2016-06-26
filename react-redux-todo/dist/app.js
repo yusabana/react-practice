@@ -17,27 +17,37 @@ function setVisibilityFilter(filter) {
 }
 
 // Reducer
-function todoApp(state, action) {
+function todos() {
+  var state = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
+  var action = arguments[1];
+
   switch (action.type) {
     case 'ADD_TODO':
-      return Object.assign({}, state, {
-        todos: [].concat(_toConsumableArray(state.todos), [{ text: action.text, completed: false }])
-      });
+      return [].concat(_toConsumableArray(state), [{ text: action.text, completed: false }]);
 
     case 'COMPLETE_TODO':
-      var tmp_state = Object.assign({}, state);
-      tmp_state.todos[action.id].completed = true;
+      var tmp_state = [].concat(_toConsumableArray(state));
+      tmp_state[action.id].completed = true;
       return tmp_state;
-
-    case 'SET_VISIBILITY_FILTER':
-      return Object.assign({}, state, {
-        visibilityFilter: action.filter
-      });
 
     default:
       return state;
   }
 }
+
+function visibilityFilter() {
+  var state = arguments.length <= 0 || arguments[0] === undefined ? 'SHOW_ALL' : arguments[0];
+  var action = arguments[1];
+
+  switch (action.type) {
+    case 'SET_VISIBILITY_FILTER':
+      return action.filter;
+    default:
+      return state;
+  }
+}
+
+var todoApp = (0, _redux.combineReducers)({ todos: todos, visibilityFilter: visibilityFilter });
 
 var initialState = {
   visibilityFilter: 'SHOW_ALL',

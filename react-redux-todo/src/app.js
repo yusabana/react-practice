@@ -1,4 +1,4 @@
-import { createStore } from 'redux'
+import { createStore, combineReducers } from 'redux'
 
 // Action Creators
 function addTodo(text) {
@@ -13,30 +13,34 @@ function setVisibilityFilter(filter) {
 }
 
 // Reducer
-function todoApp(state, action) {
+function todos(state = [], action) {
   switch(action.type) {
   case 'ADD_TODO':
-    return Object.assign({}, state, {
-      todos: [
-        ...state.todos,
-        { text: action.text, completed: false },
-      ],
-    })
+    return [
+      ...state,
+      { text: action.text, completed: false },
+    ]
 
   case 'COMPLETE_TODO':
-    let tmp_state = Object.assign({}, state)
-    tmp_state.todos[action.id].completed = true
+    let tmp_state = [...state]
+    tmp_state[action.id].completed = true
     return tmp_state
-
-  case 'SET_VISIBILITY_FILTER':
-    return Object.assign({}, state, {
-      visibilityFilter: action.filter,
-    })
 
   default:
     return state
   }
 }
+
+function visibilityFilter(state = 'SHOW_ALL', action) {
+  switch (action.type) {
+  case 'SET_VISIBILITY_FILTER':
+    return action.filter
+  default:
+    return state
+  }
+}
+
+const todoApp = combineReducers({ todos, visibilityFilter })
 
 const initialState = {
   visibilityFilter: 'SHOW_ALL',
