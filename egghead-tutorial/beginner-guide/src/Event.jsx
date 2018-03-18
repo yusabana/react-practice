@@ -1,12 +1,9 @@
-import React from "react"
+import React from 'react'
 
 class Event extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      eventCount: 10,
-      username: ""
-    }
+    this.state = { eventCount: 10, username: '', tel: '' }
 
     // これしないと 例えばincrementメソッドで this.stateにアクセスできない...
     // イベントハンドラのメソッドの場合、thisがundefinedになるのでbindする必要あり
@@ -25,7 +22,7 @@ class Event extends React.Component {
   }
 
   updateUsername(event) {
-    console.log(event.nativeEvent)
+    // console.log(event.nativeEvent)
     this.setState({ username: event.target.value })
     //    JSXに直接書く場合は以下のようにする
     //    <input onChange={event => this.setState({ username: event.target.value })} />
@@ -36,29 +33,31 @@ class Event extends React.Component {
       <div>
         <p>There have been {this.state.eventCount} events</p>
         <p>
-          <button onMouseOver={this.increment}>B</button>
+          <button onClick={this.increment} onMouseOver={this.increment}>UP😆</button>
         </p>
-        <p>You typed: {this.state.username}</p>
-        <p>
-          <input onChange={this.updateUsername} />
-        </p>
+        <p>You typed name:{this.state.username} tel:{this.state.tel}</p>
+        <p>name: <input onChange={this.updateUsername} /></p>
+        {/* jsxに直接書く場合はconstractorでやっているような bind はいらない*/}
+        <p>tel: <input onChange={event => this.setState({ tel: event.target.value })} /></p> 
       </div>
     )
   }
 }
 
-// const state = { eventCount: 0, username: "" }
+
+// // Stateless Function Componentだとムズいか...
+// const state = { eventCount: 0, username: '' }
 // const setState = newState => {
 //   Object.assign(state, newState)
 //   // 再描画したいがstateless componentじゃ無理??
 // }
-
-// setState({ eventCount: 11 })
-// setState({ username: "BOB" })
-
+//
+// setState({ username: 'BOB', eventCount: 3 })
+// setState({ eventCount: 10 })
+//
 // const Event = () => (
 //   <div>
-//     <p>There have been {state.eventCount} events</p>
+//     <p>There have been <b>{state.eventCount}</b> events</p>
 //     <p>
 //       <button onClick={() => setState({ eventCount: state.eventCount + 1 })}>B</button>
 //     </p>
