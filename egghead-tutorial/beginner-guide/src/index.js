@@ -19,4 +19,5 @@ const App = () => (
     <Event />
   </div>
 )
+
 render(<App />, document.getElementById('root'))

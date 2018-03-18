@@ -1,7 +1,8 @@
-import React from "react"
+import React from 'react'
 // import PropTypes from "prop-types"
 
 const time = new Date().toLocaleTimeString()
+
 const Timer = () => (
   <div>
     It is
