@@ -14,7 +14,10 @@ const App = () => (
     <Message>Hello World</Message>
     <Timer />
     <Box size='small' style={{ backgroundColor: 'lightblue' }}>
-      Small Box
+      Blue Box
+    </Box>
+    <Box size='small' style={{ backgroundColor: 'pink' }}>
+      Pink Box
     </Box>
     <Event />
   </div>
