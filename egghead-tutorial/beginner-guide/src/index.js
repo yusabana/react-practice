@@ -5,6 +5,7 @@ import Hello from './Hello'
 import Timer from './Timer'
 import Box from './Box'
 import Event from './Event'
+import StopWatch from './StopWatch'
 
 const Message = props => <div>{props.children}</div>
 
@@ -20,6 +21,7 @@ const App = () => (
       Pink Box
     </Box>
     <Event />
+    <StopWatch />
   </div>
 )
 
