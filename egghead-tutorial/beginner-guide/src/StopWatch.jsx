@@ -36,7 +36,7 @@ class StopWatch extends React.Component {
   }
 
   componentWillUnmount() {
-    // unmount の動かし方がわからない... ↓で チェックボックスでやってみたけど駄目や
+    // unmount の動かし方がわからない... ↓ でチェックボックスでやってみたけど駄目や
     console.log('aaaaaa UNMOUNT !!!!!!!')
     clearInterval(this.timer)
   }
