@@ -7,6 +7,7 @@ import Box from './Box'
 import Event from './Event'
 import StopWatch from './StopWatch'
 import Counter from './Counter'
+import NameForm from './NameForm'
 
 const Message = props => <div>{props.children}</div>
 
@@ -24,6 +25,7 @@ const App = () => (
     <Event />
     <StopWatch />
     <Counter />
+    <NameForm />
   </div>
 )
 
