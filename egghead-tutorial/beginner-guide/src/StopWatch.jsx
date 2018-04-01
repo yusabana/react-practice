@@ -41,9 +41,10 @@ class StopWatch extends React.Component {
     clearInterval(this.timer)
   }
 
+
   render() {
     // const {lapse, running} = this.props // this.propsとすることで classで受け取れる
-    const {lapse, running, showStopWatch} = this.state
+    const { lapse, running, showStopWatch } = this.state
     const buttonStyles = {
       border: '1px solid #ccc',
       background: 'yellow',
@@ -54,15 +55,15 @@ class StopWatch extends React.Component {
     }
 
     return (
-      <div style={{textAlign: 'center'}}>
-        <input type='checkbox' checked={this.state.showStopWatch} onChange={this.handleChangeCheckbox} />
+      <div style={{ textAlign: 'center' }}>
+        <input type='checkbox' checked={this.state.showStopWatch} onChange={this.handleChangeCheckbox}/>
         <label>Display?</label>
         {
           (() => {
             if (showStopWatch) {
               return (
                 <div>
-                  <label style={{ fontSize: '5em', display: 'block'}}>{lapse} ms</label>
+                  <label style={{ fontSize: '5em', display: 'block' }}>{lapse} ms</label>
                   <button onClick={this.handleRunClick} style={buttonStyles}>{running ? 'Stop' : 'Start'}</button>
                   <button onClick={this.handleClearClick} style={buttonStyles}>Clear</button>
                 </div>

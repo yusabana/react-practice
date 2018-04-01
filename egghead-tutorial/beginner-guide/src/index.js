@@ -6,6 +6,7 @@ import Timer from './Timer'
 import Box from './Box'
 import Event from './Event'
 import StopWatch from './StopWatch'
+import Counter from './Counter'
 
 const Message = props => <div>{props.children}</div>
 
@@ -22,6 +23,7 @@ const App = () => (
     </Box>
     <Event />
     <StopWatch />
+    <Counter />
   </div>
 )
 
