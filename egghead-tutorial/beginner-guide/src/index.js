@@ -25,7 +25,19 @@ const App = () => (
     <Event />
     <StopWatch />
     <Counter />
-    <NameForm />
+
+    <NameForm
+      getErrorMessage={value => {
+        console.log(value)
+        if (value.length < 3) {
+          return `Value must be at least 3 characters`
+        }
+        if (!value.includes('s')) {
+          return `Value does not include "s"`
+        }
+        return null
+      }}
+    />
   </div>
 )
 
