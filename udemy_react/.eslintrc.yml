@@ -1,0 +1,17 @@
+extends:
+  - airbnb
+  - prettier # eslint-config-prettier の設定
+plugins:
+  - prettier # eslint-plugin-prettier の設定
+env:
+  browser: true
+
+rules:
+  prettier/prettier: error
+
+  # .js, .jsx で JSXの定義を許可するように
+  react/jsx-filename-extension:
+    - error
+    - extensions:
+      - '.js'
+      - '.jsx'
