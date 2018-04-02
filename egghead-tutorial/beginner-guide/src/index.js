@@ -9,6 +9,8 @@ import StopWatch from './StopWatch'
 import Counter from './Counter'
 import NameForm from './NameForm'
 import AllItem from './AllItem'
+import MyFancyForm from './MyFancyForm'
+
 
 const Message = props => <div>{props.children}</div>
 
@@ -41,6 +43,8 @@ const App = () => (
     />
 
     <AllItem />
+
+    <MyFancyForm />
   </div>
 )
 
