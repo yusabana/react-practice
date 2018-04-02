@@ -8,6 +8,7 @@ import Event from './Event'
 import StopWatch from './StopWatch'
 import Counter from './Counter'
 import NameForm from './NameForm'
+import AllItem from './AllItem'
 
 const Message = props => <div>{props.children}</div>
 
@@ -38,6 +39,8 @@ const App = () => (
         return null
       }}
     />
+
+    <AllItem />
   </div>
 )
 
