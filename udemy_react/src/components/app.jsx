@@ -1,28 +1,21 @@
-/* eslint-disable jsx-a11y/mouse-events-have-key-events */
 import React, { Component } from 'react'
-
-import Greeting from './greeting'
+import SearchForm from './SearchForm.jsx'
 
 class App extends Component {
   constructor(props) {
     super(props)
-    this.state = { name: 'John' }
+    this.state = {}
   }
 
-  handleNameChange(name) {
-    this.setState({ name })
+  handlePlaceSubmit(place) {
+    console.log(place)
   }
 
   render() {
     return (
       <div>
-        <input
-          onChange={e => this.handleNameChange(e.targe.value)}
-          type="text"
-          value={this.state.name}
-        />
-        <Greeting name={this.state.name} />
-        <button onClick={() => this.handleNameChange('Bob')}>Bob</button>
+        <h1>緯度経度検索</h1>
+        <SearchForm onSubmit={place => this.handlePlaceSubmit(place)} />
       </div>
     )
   }
