@@ -1,13 +1,13 @@
 const path = require('path')
 
 // webpack4対応
-//https://github.com/webpack/webpack/issues/6568
+// https://github.com/webpack/webpack/issues/6568
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 const publidDir = path.join(__dirname, '/public')
 module.exports = [
   {
-    entry: ['./src/index.js'],
+    entry: ['./src/index.jsx'],
     output: {
       path: publidDir,
       publicPath: '/',
