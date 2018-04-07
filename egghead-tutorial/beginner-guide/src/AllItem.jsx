@@ -22,8 +22,9 @@ class AllItem extends React.Component {
           +
         </button>
         {AllItem.allItems.map(item => (
-          <button disabled>
-          </button>
+          <div key={item.id}>
+            {item.value}
+          </div>
         ))}
       </div>
     )
