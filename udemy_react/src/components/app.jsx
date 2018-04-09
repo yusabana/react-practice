@@ -3,6 +3,7 @@ import axios from 'axios'
 
 import SearchForm from './SearchForm.jsx'
 import GeocodeResult from './GeocodeResult'
+import Map from './Map'
 
 const GEOCODE_ENDPOINT = 'https://maps.googleapis.com/maps/api/geocode/json'
 
@@ -60,6 +61,7 @@ class App extends Component {
         <h1>緯度経度検索</h1>
         <SearchForm onSubmit={place => this.handlePlaceSubmit(place)} />
         <GeocodeResult address={this.state.address} lng={this.state.lng} lat={this.state.lat} />
+        <Map lat={this.state.lat} lng={this.state.lng} />
       </div>
     )
   }
