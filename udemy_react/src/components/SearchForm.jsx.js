@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react'
-import GeocodeResult from './GeocodeResult'
 
 class SearchForm extends Component {
   constructor(props) {
@@ -24,7 +23,6 @@ class SearchForm extends Component {
           value={this.state.place}
           onChange={e => this.handlePlaceChange(e.target.value)}
         />
-        <GeocodeResult address={this.state.address} lat={this.state.lat} lng={this.state.lng} />
         <input type="submit" value="検索" />
       </form>
     )

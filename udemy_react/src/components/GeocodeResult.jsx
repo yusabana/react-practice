@@ -1,4 +1,4 @@
-import React, {PropTypes} from 'react'
+import React, { PropTypes } from 'react'
 
 const GeocodeResult = ({ address, lat, lng }) => (
   <ul className="geocode-result">
