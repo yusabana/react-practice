@@ -1,33 +1,28 @@
 import React, { PropTypes } from 'react'
 import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps'
 
-const InnerMap = withGoogleMap(props => (
-  <GoogleMap defaultZoom={12} defaultCenter={props.position} center={props.position}>
-    <Marker {...props.marker} />
-    /* <Marker {...props.position} /> =イコール= <Marker lat={props.lat} lng={props.lng} /> */
-  </GoogleMap>
-))
+const InnerMap = withGoogleMap(({ location, marker }) => {
+  console.log(marker)
 
-const Map = ({ lat, lng }) => {
-  const position = { lat, lng }
   return (
-    <InnerMap
-      containerElement={<div />}
-      mapElement={<div className="map" />}
-      position={position}
-      marker={{ position }}
-    />
+    <GoogleMap defaultZoom={12} defaultCenter={location} center={location}>
+      <Marker {...marker} />
+      {/*<Marker {...location} /> =イコール= <Marker location={location} /> */}
+    </GoogleMap>
   )
-}
+})
+
+const Map = ({ location }) => (
+  <InnerMap
+    containerElement={<div />}
+    mapElement={<div className="map" />}
+    location={location}
+    marker={{ position: location }} // { position: position } となるので { position } と省略できる
+  />
+)
 
 Map.propTypes = {
-  lat: PropTypes.number,
-  lng: PropTypes.number,
-}
-
-Map.defaultProps = {
-  lat: 35.6585805,
-  lng: 139.7454329,
+  location: PropTypes.objectOf(PropTypes.number).isRequired,
 }
 
 export default Map

@@ -10,19 +10,25 @@ const GEOCODE_ENDPOINT = 'https://maps.googleapis.com/maps/api/geocode/json'
 class App extends Component {
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+      location: {
+        lat: 35.6585805,
+        lng: 139.7454329,
+      },
+    }
   }
 
   setErrorMessage(message) {
     this.setState({
       address: message,
-      lat: 0,
-      lng: 0,
+      location: {
+        lat: 0,
+        lng: 0,
+      },
     })
   }
 
   handlePlaceSubmit(place) {
-    console.log(place)
     axios
       .get(GEOCODE_ENDPOINT, { params: { address: place } })
       .then(results => {
@@ -32,11 +38,9 @@ class App extends Component {
 
         switch (data.status) {
           case 'OK': {
-            const { lat, lng } = result.geometry.location
             this.setState({
               address: result.formatted_address,
-              lat,
-              lng,
+              location: result.geometry.location,
             })
             break
           }
@@ -60,8 +64,8 @@ class App extends Component {
       <div>
         <h1>緯度経度検索</h1>
         <SearchForm onSubmit={place => this.handlePlaceSubmit(place)} />
-        <GeocodeResult address={this.state.address} lng={this.state.lng} lat={this.state.lat} />
-        <Map lat={this.state.lat} lng={this.state.lng} />
+        <GeocodeResult address={this.state.address} location={this.state.location} />
+        <Map location={this.state.location} />
       </div>
     )
   }
