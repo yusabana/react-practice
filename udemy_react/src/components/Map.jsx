@@ -2,8 +2,6 @@ import React, { PropTypes } from 'react'
 import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps'
 
 const InnerMap = withGoogleMap(({ location, marker }) => {
-  console.log(marker)
-
   return (
     <GoogleMap defaultZoom={12} defaultCenter={location} center={location}>
       <Marker {...marker} />
