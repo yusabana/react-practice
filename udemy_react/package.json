@@ -34,6 +34,7 @@
     "geolib": "^2.0.24",
     "lodash": "^4.17.5",
     "prop-types": "^15.6.1",
+    "query-string": "^6.0.0",
     "react": "15.6.1",
     "react-dom": "15.6.1",
     "react-google-maps": "^9.4.5",
