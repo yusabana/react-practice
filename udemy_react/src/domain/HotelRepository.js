@@ -1,7 +1,7 @@
 import geolib from 'geolib'
 import Rakuten from '../lib/Rakuten'
 
-const RAKUTEN_APP_ID = '1030917990053491604'
+const RAKUTEN_APP_ID = 'APP_ID'
 
 // datumType は Google API の場合世界測地系となり単位は度
 // https://webservice.rakuten.co.jp/api/simplehotelsearch/
