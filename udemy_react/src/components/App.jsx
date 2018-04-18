@@ -11,6 +11,7 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      address: '',
       location: {
         lat: 35.6585804,
         lng: 139.7454329,
