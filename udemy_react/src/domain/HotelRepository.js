@@ -18,7 +18,6 @@ export const searchHotelByLocation = location => {
     console.log(result)
     return result.data.hotels.map(hotel => {
       const basicInfo = hotel.hotel[0].hotelBasicInfo
-      const price = basicInfo.hotelMinCharge ? `${basicInfo.hotelMinCharge}円` : '空室なし'
       const distance = geolib.getDistance(
         { latitude: location.lat, longitude: location.lng },
         { latitude: basicInfo.latitude, longitude: basicInfo.longitude }
@@ -29,7 +28,7 @@ export const searchHotelByLocation = location => {
         name: basicInfo.hotelName,
         url: basicInfo.hotelInformationUrl,
         thumbUrl: basicInfo.hotelThumbnailUrl,
-        price,
+        price: basicInfo.hotelMinCharge,
         reviewAverage: basicInfo.reviewAverage,
         reviewCount: basicInfo.reviewCount,
         distance,
