@@ -38,6 +38,11 @@ const App = () => (
             Recompose でいい感じに Higher-order Components(HoCs)を作る - Qiita
           </a>
         </li>
+        <li>
+          <a href="https://qiita.com/terrierscript/items/275dc41d0705f63ba95f">
+            Recompose でいい感じに Higher-order Components(HoCs)を作る - Qiita
+          </a>
+        </li>
       </ul>
 
       <div style={styles}>
