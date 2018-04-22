@@ -1,3 +1,5 @@
+// コンテナコンポーネント
+
 import React, { Component } from 'react'
 import Proptypes from 'prop-types'
 import _ from 'lodash'
@@ -29,10 +31,18 @@ class SearchPage extends Component {
   }
 
   componentDidMount() {
-    const place = this.getPlaceParam()
-    if (place) {
-      this.startSearch(place)
-    }
+    // store.subscribeは関数を返り値で受け取っている
+    this.unsubscribe = this.props.store.subscribe(() => {
+      this.forceUpdate()
+    })
+    // const place = this.getPlaceParam()
+    // if (place) {
+    //   this.startSearch(place)
+    // }
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe()
   }
 
   setErrorMessage(message) {
@@ -60,7 +70,9 @@ class SearchPage extends Component {
 
   handlePlaceChange(e) {
     e.preventDefault()
-    this.props.onPlaceChange(e.target.value)
+    // this.props.onPlaceChange(e.target.value)
+    // console.log('aaaaaaaaa')
+    this.props.store.dispatch({ type: 'CHANGE_PLACE', place: e.target.value })
   }
 
   handlePlaceSubmit(e) {
@@ -98,11 +110,13 @@ class SearchPage extends Component {
   }
 
   render() {
+    const state = this.props.store.getState()
+
     return (
       <div className="search-page">
         <h1 className="app-title">ホテル検索</h1>
         <SearchForm
-          place={this.props.place}
+          place={state.place}
           onPlaceChange={e => this.handlePlaceChange(e)}
           onSubmit={e => this.handlePlaceSubmit(e)}
         />
@@ -127,10 +141,15 @@ class SearchPage extends Component {
 }
 
 SearchPage.propTypes = {
-  place: Proptypes.string.isRequired,
   history: Proptypes.shape({ push: Proptypes.func }).isRequired,
   location: Proptypes.shape({ search: Proptypes.string }).isRequired,
-  onPlaceChange: Proptypes.func.isRequired,
+  store: Proptypes.shape({
+    subscribe: Proptypes.func,
+    getState: Proptypes.func,
+    dispatch: Proptypes.func,
+  }).isRequired,
+  // place: Proptypes.string.isRequired,
+  // onPlaceChange: Proptypes.func.isRequired,
 }
 
 export default SearchPage
