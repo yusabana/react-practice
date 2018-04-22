@@ -4,9 +4,9 @@ import _ from 'lodash'
 import queryString from 'query-string'
 
 import SearchForm from './SearchForm'
-import GeocodeResult from './GeocodeResult'
-import Map from './Map'
-import HotelsTable from './HotelsTable'
+// import GeocodeResult from './GeocodeResult'
+// import Map from './Map'
+// import HotelsTable from './HotelsTable'
 import { geocode } from '../domain/Geocoder'
 import { searchHotelByLocation } from '../domain/HotelRepository'
 
@@ -58,8 +58,9 @@ class SearchPage extends Component {
     this.setState({ sortKey, hotels: sortedHotels(this.state.hotels, sortKey) })
   }
 
-  handlePlaceChange(place) {
-    this.setState({ place })
+  handlePlaceChange(e) {
+    e.preventDefault()
+    this.props.onPlaceChange(e.target.value)
   }
 
   handlePlaceSubmit(e) {
@@ -101,30 +102,35 @@ class SearchPage extends Component {
       <div className="search-page">
         <h1 className="app-title">ホテル検索</h1>
         <SearchForm
-          place={this.state.place}
-          onPlaceChange={place => this.handlePlaceChange(place)}
+          place={this.props.place}
+          onPlaceChange={e => this.handlePlaceChange(e)}
           onSubmit={e => this.handlePlaceSubmit(e)}
         />
-        <div className="result-area">
-          <Map location={this.state.location} />
-          <div className="result-right">
-            <GeocodeResult address={this.state.address} location={this.state.location} />
+
+        {/*
+        <div classname="result-area">
+          <map location={this.state.location} />
+          <div classname="result-right">
+            <geocoderesult address={this.state.address} location={this.state.location} />
             <h2>ホテル検索結果</h2>
-            <HotelsTable
+            <hotelstable
               hotels={this.state.hotels}
-              sortKey={this.state.sortKey}
-              onSort={sortKey => this.handleSortKeyChange(sortKey)}
+              sortkey={this.state.sortkey}
+              onsort={sortkey => this.handlesortkeychange(sortkey)}
             />
           </div>
         </div>
+        */}
       </div>
     )
   }
 }
 
 SearchPage.propTypes = {
+  place: Proptypes.string.isRequired,
   history: Proptypes.shape({ push: Proptypes.func }).isRequired,
   location: Proptypes.shape({ search: Proptypes.string }).isRequired,
+  onPlaceChange: Proptypes.func.isRequired,
 }
 
 export default SearchPage
