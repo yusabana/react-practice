@@ -1,6 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
-import SearchPage from './SearchPage'
+import SearchPage from '../containers/SearchPage'
 import AboutPage from './AboutPage'
 
 const App = () => (

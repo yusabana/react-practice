@@ -5,7 +5,7 @@ import Proptypes from 'prop-types'
 import _ from 'lodash'
 import queryString from 'query-string'
 
-import SearchForm from './SearchForm'
+import SearchForm from '../components/SearchForm'
 // import GeocodeResult from './GeocodeResult'
 // import Map from './Map'
 // import HotelsTable from './HotelsTable'
