@@ -2,11 +2,10 @@
 
 import React, { Component } from 'react'
 import Proptypes from 'prop-types'
-import { connect } from 'react-redux'
 import _ from 'lodash'
 import queryString from 'query-string'
 
-import SearchForm from '../components/SearchForm'
+import SearchForm from '../containers/SearchForm'
 // import GeocodeResult from './GeocodeResult'
 // import Map from './Map'
 // import HotelsTable from './HotelsTable'
@@ -14,16 +13,6 @@ import { geocode } from '../domain/Geocoder'
 import { searchHotelByLocation } from '../domain/HotelRepository'
 
 const sortedHotels = (hotels, sortKey) => _.sortBy(hotels, h => h[sortKey])
-
-// state をもらって props を返す純粋関数
-const mapStateToProps = state => ({
-  place: state.place,
-})
-
-// dispatch をもらって props を返す純粋関数
-const mapDispatchToProps = dispatch => ({
-  onPlaceChange: place => dispatch({ type: 'CHANGE_PLACE', place }),
-})
 
 class SearchPage extends Component {
   constructor(props) {
@@ -71,11 +60,6 @@ class SearchPage extends Component {
     this.setState({ sortKey, hotels: sortedHotels(this.state.hotels, sortKey) })
   }
 
-  handlePlaceChange(e) {
-    e.preventDefault()
-    this.props.onPlaceChange(e.target.value)
-  }
-
   handlePlaceSubmit(e) {
     e.preventDefault()
     this.props.history.push(`/?place=${this.state.place}`)
@@ -116,11 +100,7 @@ class SearchPage extends Component {
     return (
       <div className="search-page">
         <h1 className="app-title">ホテル検索</h1>
-        <SearchForm
-          place={this.props.place}
-          onPlaceChange={e => this.handlePlaceChange(e)}
-          onSubmit={e => this.handlePlaceSubmit(e)}
-        />
+        <SearchForm onSubmit={e => this.handlePlaceSubmit(e)} />
 
         {/*
         <div classname="result-area">
@@ -144,8 +124,6 @@ class SearchPage extends Component {
 SearchPage.propTypes = {
   history: Proptypes.shape({ push: Proptypes.func }).isRequired,
   location: Proptypes.shape({ search: Proptypes.string }).isRequired,
-  place: Proptypes.string.isRequired,
-  onPlaceChange: Proptypes.func.isRequired,
 }
-const ConnectedSearchPage = connect(mapStateToProps, mapDispatchToProps)(SearchPage)
-export default ConnectedSearchPage
+
+export default SearchPage
