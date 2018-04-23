@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react'
 import Proptypes from 'prop-types'
+import { connect } from 'react-redux'
 import _ from 'lodash'
 import queryString from 'query-string'
 
@@ -13,6 +14,16 @@ import { geocode } from '../domain/Geocoder'
 import { searchHotelByLocation } from '../domain/HotelRepository'
 
 const sortedHotels = (hotels, sortKey) => _.sortBy(hotels, h => h[sortKey])
+
+// state をもらって props を返す純粋関数
+const mapStateToProps = state => ({
+  place: state.place,
+})
+
+// dispatch をもらって props を返す純粋関数
+const mapDispatchToProps = dispatch => ({
+  onPlaceChange: place => dispatch({ type: 'CHANGE_PLACE', place }),
+})
 
 class SearchPage extends Component {
   constructor(props) {
@@ -31,18 +42,10 @@ class SearchPage extends Component {
   }
 
   componentDidMount() {
-    // store.subscribeは関数を返り値で受け取っている
-    this.unsubscribe = this.props.store.subscribe(() => {
-      this.forceUpdate()
-    })
     // const place = this.getPlaceParam()
     // if (place) {
     //   this.startSearch(place)
     // }
-  }
-
-  componentWillUnmount() {
-    this.unsubscribe()
   }
 
   setErrorMessage(message) {
@@ -70,9 +73,7 @@ class SearchPage extends Component {
 
   handlePlaceChange(e) {
     e.preventDefault()
-    // this.props.onPlaceChange(e.target.value)
-    // console.log('aaaaaaaaa')
-    this.props.store.dispatch({ type: 'CHANGE_PLACE', place: e.target.value })
+    this.props.onPlaceChange(e.target.value)
   }
 
   handlePlaceSubmit(e) {
@@ -110,13 +111,13 @@ class SearchPage extends Component {
   }
 
   render() {
-    const state = this.props.store.getState()
+    console.log(this.props)
 
     return (
       <div className="search-page">
         <h1 className="app-title">ホテル検索</h1>
         <SearchForm
-          place={state.place}
+          place={this.props.place}
           onPlaceChange={e => this.handlePlaceChange(e)}
           onSubmit={e => this.handlePlaceSubmit(e)}
         />
@@ -143,13 +144,8 @@ class SearchPage extends Component {
 SearchPage.propTypes = {
   history: Proptypes.shape({ push: Proptypes.func }).isRequired,
   location: Proptypes.shape({ search: Proptypes.string }).isRequired,
-  store: Proptypes.shape({
-    subscribe: Proptypes.func,
-    getState: Proptypes.func,
-    dispatch: Proptypes.func,
-  }).isRequired,
-  // place: Proptypes.string.isRequired,
-  // onPlaceChange: Proptypes.func.isRequired,
+  place: Proptypes.string.isRequired,
+  onPlaceChange: Proptypes.func.isRequired,
 }
-
-export default SearchPage
+const ConnectedSearchPage = connect(mapStateToProps, mapDispatchToProps)(SearchPage)
+export default ConnectedSearchPage

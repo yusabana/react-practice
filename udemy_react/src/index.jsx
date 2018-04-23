@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { createStore } from 'redux'
+import { Provider } from 'react-redux'
 
 // TODO: 一時的にsearch部分をReduxするためにSearchPageをマウントする
 // import App from './components/App'
@@ -9,6 +10,8 @@ import reducer from './reducers/'
 
 // SearchPage側でreduxとつながっているのでここではシンプルにrenderするだけでよい
 ReactDOM.render(
-  <SearchPage history={history} location={location} store={createStore(reducer)} />,
-  document.querySelector('.container')
+  <Provider store={createStore(reducer)}>
+    <SearchPage history={history} location={location} />
+  </Provider>,
+  document.querySelector('.container'),
 )
