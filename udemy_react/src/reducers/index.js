@@ -1,13 +1,22 @@
 // reducer は state と action を引数に取って新しい state を返す純粋な関数
 
+import queryString from 'query-string'
 import { combineReducers } from 'redux' // combineReducerで place のキーで stateを東京タワーとして渡すことができる
 
 /* 以下から関数の分け方は受け取る引数 state の内容によって切り替える */
-// combineReducer するために state は文字列で 東京タワーを持っている
-const place = (state = '東京タワー', action) => {
-  console.log('action -=-> ', action)
-  console.log('state -=-> ', state)
 
+const getPlaceParam = () => {
+  // props には ReactRouterの機能でlocationの情報が渡されている
+  // eslint-disable-next-line no-restricted-globals
+  const { place } = queryString.parse(location.search) // location は global から取得する
+  if (place && place.length > 0) {
+    return place
+  }
+  return null
+}
+
+// combineReducer するために state は文字列で 東京タワーを持っている
+const place = (state = getPlaceParam() || '東京タワー', action) => {
   switch (action.type) {
     case 'CHANGE_PLACE':
       return action.place // combineReducers を使う時は単純に更新したい値を返してあげればいい。Object.assign() はいらない

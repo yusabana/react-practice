@@ -6,9 +6,7 @@ import thunk from 'redux-thunk'
 // applyMiddleware で middleware を使いつつredux-devtoolsを利用する
 import { composeWithDevTools } from 'redux-devtools-extension'
 
-// TODO: 一時的にsearch部分をReduxするためにSearchPageをマウントする
-// import App from './components/App'
-import SearchPage from './components/SearchPage'
+import App from './components/App'
 import reducer from './reducers/'
 
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)))
@@ -16,7 +14,7 @@ const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)))
 // SearchPage側でreduxとつながっているのでここではシンプルにrenderするだけでよい
 ReactDOM.render(
   <Provider store={store}>
-    <SearchPage history={history} location={location} />
+    <App />
   </Provider>,
   document.querySelector('.container')
 )

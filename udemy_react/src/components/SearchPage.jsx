@@ -1,30 +1,18 @@
 // コンテナコンポーネント
 
 import React, { Component } from 'react'
-import Proptypes from 'prop-types'
-import queryString from 'query-string'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import SearchForm from '../containers/SearchForm'
 import GeocodeResult from './GeocodeResult'
 import Map from './Map'
 import HotelsTable from './HotelsTable'
-
+import { startSearch } from '../actions'
 
 class SearchPage extends Component {
-  getPlaceParam() {
-    // props には ReactRouterの機能でlocationの情報が渡されている
-    const { place } = queryString.parse(this.props.location.search)
-    if (place && place.length > 0) {
-      return place
-    }
-    return null
+  componentDidMount() {
+    this.props.dispatch(startSearch()) // connect することで props に dispatch が入る
   }
-
-  // handlePlaceSubmit(e) {
-  //   e.preventDefault()
-  //   this.props.history.push(`/?place=${this.state.place}`)
-  //   this.startSearch()
-  // }
 
   render() {
     console.log(this.props)
@@ -32,7 +20,7 @@ class SearchPage extends Component {
     return (
       <div className="search-page">
         <h1 className="app-title">ホテル検索</h1>
-        <SearchForm />
+        <SearchForm history={this.props.history} />
 
         <div className="result-area">
           <Map location={this.props.geocodeResult.location} />
@@ -51,14 +39,16 @@ class SearchPage extends Component {
 }
 
 SearchPage.propTypes = {
-  location: Proptypes.shape({ search: Proptypes.string }).isRequired,
-  geocodeResult: Proptypes.shape({
-    address: Proptypes.string,
-    location: Proptypes.shape({
-      lat: Proptypes.number.isRequired,
-      lng: Proptypes.number.isRequired,
+  history: PropTypes.shape({ push: PropTypes.func }).isRequired,
+  location: PropTypes.shape({ search: PropTypes.string }).isRequired,
+  geocodeResult: PropTypes.shape({
+    address: PropTypes.string,
+    location: PropTypes.shape({
+      lat: PropTypes.number.isRequired,
+      lng: PropTypes.number.isRequired,
     }),
   }).isRequired,
+  dispatch: PropTypes.func.isRequired,
 }
 
 // state をもらって props を返す純粋関数

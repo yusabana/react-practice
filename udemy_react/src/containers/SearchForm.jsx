@@ -8,6 +8,7 @@ const SearchForm = props => (
     className="search-form"
     onSubmit={e => {
       e.preventDefault()
+      props.history.push(`/?place=${props.place}`)
       props.startSearch()
     }}
   >
@@ -26,12 +27,13 @@ const SearchForm = props => (
 )
 
 SearchForm.propTypes = {
+  history: PropTypes.shape({ push: PropTypes.func }).isRequired,
   place: PropTypes.string.isRequired,
   setPlace: PropTypes.func.isRequired,
   startSearch: PropTypes.func.isRequired,
 }
 
-// ここで connect に setPlace と startSearch を設定することで SearchForm コンポーネントから
+// ここで connect の第2引数に setPlace と startSearch を設定することで SearchForm コンポーネントから
 // props.setPlace(e.target.value) などのように呼び出すことができる
 export default connect(
   state => ({
