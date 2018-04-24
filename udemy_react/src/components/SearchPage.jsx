@@ -2,33 +2,15 @@
 
 import React, { Component } from 'react'
 import Proptypes from 'prop-types'
-// import _ from 'lodash'
 import queryString from 'query-string'
 import { connect } from 'react-redux'
-import { geocode } from '../domain/Geocoder'
 import SearchForm from '../containers/SearchForm'
 import GeocodeResult from './GeocodeResult'
 import Map from './Map'
-// import HotelsTable from './HotelsTable'
+import HotelsTable from './HotelsTable'
 
-// const sortedHotels = (hotels, sortKey) => _.sortBy(hotels, h => h[sortKey])
 
 class SearchPage extends Component {
-  // constructor(props) {
-  //   super(props)
-  //
-  //   // this.state = {
-  //   //   sortKey: 'price',
-  //   // }
-  // }
-
-  componentDidMount() {
-    // const place = this.getPlaceParam()
-    // if (place) {
-    //   this.startSearch(place)
-    // }
-  }
-
   getPlaceParam() {
     // props には ReactRouterの機能でlocationの情報が渡されている
     const { place } = queryString.parse(this.props.location.search)
@@ -37,10 +19,6 @@ class SearchPage extends Component {
     }
     return null
   }
-
-  // handleSortKeyChange(sortKey) {
-  //   this.setState({ sortKey, hotels: sortedHotels(this.state.hotels, sortKey) })
-  // }
 
   // handlePlaceSubmit(e) {
   //   e.preventDefault()
@@ -63,14 +41,8 @@ class SearchPage extends Component {
               address={this.props.geocodeResult.address}
               location={this.props.geocodeResult.location}
             />
-            {/*
             <h2>ホテル検索結果</h2>
-            <HotelsTable
-              hotels={this.state.hotels}
-              sortkey={this.state.sortkey}
-              onsort={sortkey => this.handleSortKeyChange(sortkey)}
-            />
-            */}
+            <HotelsTable />
           </div>
         </div>
       </div>
@@ -79,7 +51,6 @@ class SearchPage extends Component {
 }
 
 SearchPage.propTypes = {
-  // history: Proptypes.shape({ push: Proptypes.func }).isRequired,
   location: Proptypes.shape({ search: Proptypes.string }).isRequired,
   geocodeResult: Proptypes.shape({
     address: Proptypes.string,
