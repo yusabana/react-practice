@@ -4,7 +4,7 @@ egghead.ioのチュートリアル
 - [Learn React Today from Expert Video Screencast Tutorials](https://egghead.io/browse/frameworks/react)
 
 - React版
-  - [ ] [The Beginner's Guide to ReactJS from @kentcdodds on @eggheadio](https://egghead.io/courses/the-beginner-s-guide-to-reactjs)
+  - [x] [The Beginner's Guide to ReactJS from @kentcdodds on @eggheadio](https://egghead.io/courses/the-beginner-s-guide-to-reactjs)
   - [ ] [Advanced React Component Patterns from @kentcdodds on @eggheadio](https://egghead.io/courses/advanced-react-component-patterns)
 
 
