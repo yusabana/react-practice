@@ -6,9 +6,9 @@ import { compose, withState, withHandlers } from "recompose"
 const Enhance = compose(
   withState("counter", "updateCounter", 0),
   withHandlers({
-    increment: ({ updateCounter }) => val => updateCounter(counter => counter + val),
-    decrement: ({ updateCounter }) => () => updateCounter(counter => counter - 1),
-    reset: ({ updateCounter }) => () => updateCounter(0)
+    increment: ({ updateCounter }) => val => updateCounter(counter => counter + val), // 明示的に 2 を引数で渡しているので2で受け取れる
+    decrement: ({ updateCounter }) => event => updateCounter(counter => counter - 1), // eventはonClickのイベントハンドラに設定しているので受け取れる
+    reset: ({ updateCounter }) => () => updateCounter(0) // event別に必要なければ受け取らなくてもよい
   })
 )
 
@@ -16,8 +16,7 @@ const App = ({ counter, increment, decrement, reset }) => {
   return (
     <div>
       <h1>Count: {counter}</h1>
-      {/* こんな感じで無名関数でラップして上げることもできる */}
-      <button onClick={() => increment(2)}>Incliment</button> 
+      <button onClick={() => increment(2)}>Incliment</button> {/* こんな感じで無名関数でラップして上げることもできる */}
       <button onClick={decrement}>Decrement</button>
       <button onClick={reset}>Reset</button>
     </div>
