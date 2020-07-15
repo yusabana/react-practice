@@ -9,23 +9,30 @@
  */
 
 import React from 'react'
-import { StyleSheet, View, Text } from 'react-native'
+import styled from 'styled-components/native'
+
+const StyledView = styled.View`
+  flex: 1;
+  background-color: papayawhip;
+  align-items: center;
+  justify-content: center;
+  width: 350px;
+`
+
+const StyledText = styled.Text`
+  color: red;
+  font-size: 14px;
+`
 
 const App = () => {
   return (
-    <View style={styles.container}>
-      <Text>Hello, world.</Text>
-    </View>
+    <StyledView>
+      <StyledText>Hello, World.</StyledText>
+      <StyledText>Hello, World.</StyledText>
+      <StyledText>Hello, World.</StyledText>
+      <StyledText>Hello, World.</StyledText>
+    </StyledView>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-})
 
 export default App
