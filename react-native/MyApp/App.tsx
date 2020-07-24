@@ -10,9 +10,11 @@
 
 import React from 'react'
 import styled from 'styled-components/native'
-import { MemoListScreen } from './src/screens/MemoListScreen'
 import { AppBar } from './src/components/AppBar'
-import { MemoDetailScreen } from './src/screens/MemoDetailScreen'
+import { LoginScreen } from './src/screens/LoginScreen'
+// import { MemoListScreen } from './src/screens/MemoListScreen'
+// import { MemoDetailScreen } from './src/screens/MemoDetailScreen'
+// import { MemoEditScreen } from './src/screens/MemoEditScreen'
 
 const Container = styled.View`
   flex: 1;
@@ -27,7 +29,9 @@ const App = () => {
     <Container>
       <AppBar />
       {/* <MemoListScreen /> */}
-      <MemoDetailScreen />
+      {/* <MemoDetailScreen /> */}
+      {/* <MemoEditScreen /> */}
+      <LoginScreen />
     </Container>
   )
 }
