@@ -1,15 +1,13 @@
 import * as React from 'react'
 import styled from 'styled-components/native'
-import { View } from 'react-native'
+import { StackHeaderTitleProps } from '@react-navigation/stack'
 
-const Appbar = styled.View`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 78px;
-  padding-top: 30px;
-  background-color: #265366;
+const StyledAppbar = styled.View`
+  /* 背景色がヘッダー全体に適用できない */
+  /* background-color: #265366; */
+  width: 100%;
+  align-self: center;
+  height: 30px;
   justify-content: center;
   align-items: center;
 `
@@ -18,17 +16,13 @@ const AppbarText = styled.Text`
   color: #fff;
 `
 
-type Props = {
-  children?: never
-}
+type Props = StackHeaderTitleProps
 
-const AppBar: React.FC<Props> = () => {
+const AppBar: React.FC<Props> = ({ children }) => {
   return (
-    <Appbar>
-      <View>
-        <AppbarText>MEMOT</AppbarText>
-      </View>
-    </Appbar>
+    <StyledAppbar>
+      <AppbarText>{children ? children : 'MEMOLIST'}</AppbarText>
+    </StyledAppbar>
   )
 }
 

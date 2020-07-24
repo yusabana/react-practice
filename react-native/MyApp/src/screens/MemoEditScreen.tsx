@@ -1,6 +1,9 @@
 import * as React from 'react'
 import styled from 'styled-components/native'
 import { CircleButton } from '../elements/CircleButton'
+import { StackNavigationProp } from '@react-navigation/stack'
+import { RootStackParamList } from 'App'
+import { RouteProp } from '@react-navigation/native'
 
 const Container = styled.View`
   flex: 1;
@@ -15,13 +18,21 @@ const EditInput = styled.TextInput`
 
 const StyledCircleButton = styled(CircleButton)``
 
-const MemoEditScreen = () => {
+type Props = {
+  navigation: StackNavigationProp<RootStackParamList, 'Login'>
+  route: RouteProp<RootStackParamList, 'Login'>
+}
+
+const MemoEditScreen: React.FC<Props> = ({ navigation }) => {
   const [body, setBody] = React.useState('あいうえお')
+
   return (
     <Container>
       <EditInput value={body} multiline={true} onChangeText={setBody} />
 
-      <StyledCircleButton color="light">Edit</StyledCircleButton>
+      <StyledCircleButton onPress={navigation.goBack} color="light">
+        D
+      </StyledCircleButton>
     </Container>
   )
 }

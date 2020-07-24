@@ -1,6 +1,9 @@
 import * as React from 'react'
 import styled from 'styled-components/native'
 import { TouchableHighlight, Text } from 'react-native'
+import { RootStackParamList } from 'App'
+import { StackNavigationProp } from '@react-navigation/stack'
+import { RouteProp } from '@react-navigation/native'
 
 const Container = styled.View`
   flex: 1;
@@ -38,7 +41,16 @@ const LoginButtonTitle = styled(Text)`
   font-size: 20px;
 `
 
-const LoginScreen = () => {
+type Props = {
+  navigation: StackNavigationProp<RootStackParamList, 'Login'>
+  route: RouteProp<RootStackParamList, 'Login'>
+}
+
+const LoginScreen: React.FC<Props> = ({ navigation }) => {
+  const handleLogin = React.useCallback(() => {
+    navigation.navigate('Memo')
+  }, [navigation])
+
   return (
     <Container>
       <Title>ログイン</Title>
@@ -47,7 +59,7 @@ const LoginScreen = () => {
       <LoginButton
         activeOpacity={0.9}
         underlayColor="#c70f66"
-        onPress={() => {}}>
+        onPress={handleLogin}>
         <LoginButtonTitle>ログインする</LoginButtonTitle>
       </LoginButton>
     </Container>

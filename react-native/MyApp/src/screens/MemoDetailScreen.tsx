@@ -2,6 +2,9 @@ import { Text } from 'react-native'
 import * as React from 'react'
 import styled from 'styled-components/native'
 import { CircleButton } from '../elements/CircleButton'
+import { StackNavigationProp } from '@react-navigation/stack'
+import { RootStackParamList } from 'App'
+import { RouteProp } from '@react-navigation/native'
 
 const Container = styled.View`
   flex: 1;
@@ -37,7 +40,16 @@ const StyledCircleButton = styled(CircleButton)`
   bottom: auto;
 `
 
-const MemoDetailScreen = () => {
+type Props = {
+  navigation: StackNavigationProp<RootStackParamList, 'MemoDetail'>
+  route: RouteProp<RootStackParamList, 'MemoDetail'>
+}
+
+const MemoDetailScreen: React.FC<Props> = ({ navigation }) => {
+  const handleEditButton = React.useCallback(() => {
+    navigation.navigate('MemoEdit')
+  }, [navigation])
+
   return (
     <Container>
       <Header>
@@ -49,7 +61,9 @@ const MemoDetailScreen = () => {
         <Text>講座のアイデアです。本文です。 すよね</Text>
       </Body>
 
-      <StyledCircleButton color="light">+</StyledCircleButton>
+      <StyledCircleButton color="light" onPress={handleEditButton}>
+        E
+      </StyledCircleButton>
     </Container>
   )
 }

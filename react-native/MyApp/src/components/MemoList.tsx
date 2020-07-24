@@ -1,9 +1,13 @@
 import * as React from 'react'
 import styled from 'styled-components/native'
+import { TouchableHighlight } from 'react-native'
+import { StackNavigationProp } from '@react-navigation/stack'
+import { RootStackParamList } from 'App'
 
 const StyledMemoList = styled.View`
   flex: 1;
   width: 100%;
+  background-color: #fffdf6;
 `
 
 const MemoListItem = styled.View`
@@ -20,14 +24,22 @@ const MemoDate = styled.Text`
   font-size: 12px;
   color: #a2a2a2;
 `
+type Props = {
+  navigation: StackNavigationProp<RootStackParamList, 'Memo'>
+}
 
-const MemoList: React.FC = () => {
+const MemoList: React.FC<Props> = ({ navigation }) => {
   return (
     <StyledMemoList>
-      <MemoListItem>
-        <MemoTitle>講座のアイテム</MemoTitle>
-        <MemoDate>2020/06/10</MemoDate>
-      </MemoListItem>
+      <TouchableHighlight
+        onPress={() => {
+          navigation.navigate('MemoDetail')
+        }}>
+        <MemoListItem>
+          <MemoTitle>講座のアイテム</MemoTitle>
+          <MemoDate>2020/06/10</MemoDate>
+        </MemoListItem>
+      </TouchableHighlight>
 
       <MemoListItem>
         <MemoTitle>講座のアイテム</MemoTitle>
