@@ -46,7 +46,7 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Signup"
+        initialRouteName="Login"
         screenOptions={{
           headerTitle: (props) => <AppBar {...props} />,
           headerStyle: { backgroundColor: '#265366' },

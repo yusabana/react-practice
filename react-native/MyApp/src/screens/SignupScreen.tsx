@@ -51,6 +51,7 @@ const SignupScreen: React.FC<Props> = ({ navigation }) => {
   const [password, setPassword] = React.useState('')
 
   const handleSubmit = React.useCallback(async () => {
+    // async-catchパターン
     const result = await firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)

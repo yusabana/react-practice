@@ -1,6 +1,7 @@
 import * as React from 'react'
 import styled from 'styled-components/native'
 import { TouchableHighlight, Text } from 'react-native'
+import firebase from 'firebase'
 import { RootStackParamList } from 'App'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { RouteProp } from '@react-navigation/native'
@@ -47,12 +48,23 @@ type Props = {
 }
 
 const LoginScreen: React.FC<Props> = ({ navigation }) => {
-  const handleLogin = () => {
-    console.log('LOGIN')
-  }
-
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
+
+  const handleLogin = async () => {
+    // try-asyncパターン
+    try {
+      const result = await firebase
+        .auth()
+        .signInWithEmailAndPassword(email, password)
+
+      console.log('Success', result, email, password)
+      navigation.navigate('Memo')
+    } catch (error) {
+      console.log('Error', error, email, password)
+      return
+    }
+  }
 
   return (
     <Container>
