@@ -47,15 +47,29 @@ type Props = {
 }
 
 const LoginScreen: React.FC<Props> = ({ navigation }) => {
-  const handleLogin = React.useCallback(() => {
-    navigation.navigate('Memo')
-  }, [navigation])
+  const handleLogin = () => {
+    console.log('LOGIN')
+  }
+
+  const [email, setEmail] = React.useState('')
+  const [password, setPassword] = React.useState('')
 
   return (
     <Container>
       <Title>ログイン</Title>
-      <TextField value="Email" />
-      <TextField value="Password" />
+      <TextField
+        value={email}
+        onChangeText={setEmail}
+        autoCapitalize="none"
+        placeholder="Email Address"
+      />
+      <TextField
+        value={password}
+        onChangeText={setPassword}
+        autoCapitalize="none"
+        placeholder="Password"
+        secureTextEntry={true}
+      />
       <LoginButton
         activeOpacity={0.9}
         underlayColor="#c70f66"
