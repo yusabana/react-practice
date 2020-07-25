@@ -20,6 +20,7 @@ import { MemoDetailScreen } from './src/screens/MemoDetailScreen'
 import { MemoEditScreen } from './src/screens/MemoEditScreen'
 import { SignupScreen } from './src/screens/SignupScreen'
 import ENV from './env.json'
+import 'firebase/firestore'
 
 const firebaseConfig = {
   apiKey: ENV.FIREBASE_API_KEY,

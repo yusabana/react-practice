@@ -4,6 +4,7 @@ import { RouteProp } from '@react-navigation/native'
 import { RootStackParamList } from 'App'
 import { MemoList } from '../components/MemoList'
 import { CircleButton } from '../elements/CircleButton'
+import firebase from 'firebase'
 
 type Props = {
   navigation: StackNavigationProp<RootStackParamList, 'Memo'>
@@ -11,10 +12,26 @@ type Props = {
 }
 
 const MemoListScreen: React.FC<Props> = ({ navigation }) => {
+  const handleNew = () => {
+    const db = firebase.firestore()
+    console.log('new', db)
+
+    db.collection('memos')
+      .add({
+        body: 'test memo',
+        createdOn: '2020-07-26',
+      })
+      .then((docRef) => {
+        console.log(docRef.id)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
   return (
     <>
       <MemoList navigation={navigation} />
-      <CircleButton onPress={() => {}}>+</CircleButton>
+      <CircleButton onPress={handleNew}>+</CircleButton>
     </>
   )
 }
