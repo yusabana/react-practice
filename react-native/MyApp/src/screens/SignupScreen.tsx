@@ -1,6 +1,10 @@
 import * as React from 'react'
 import styled from 'styled-components/native'
 import { TouchableHighlight, Text } from 'react-native'
+import firebase from 'firebase'
+import { StackNavigationProp } from '@react-navigation/stack'
+import { RootStackParamList } from 'App'
+import { RouteProp } from '@react-navigation/native'
 
 const Container = styled.View`
   flex: 1;
@@ -37,17 +41,52 @@ const SignupButtonTitle = styled(Text)`
   color: #fff;
   font-size: 20px;
 `
+type Props = {
+  navigation: StackNavigationProp<RootStackParamList, 'Signup'>
+  route: RouteProp<RootStackParamList, 'Signup'>
+}
 
-const SignupScreen = () => {
+const SignupScreen: React.FC<Props> = ({ navigation }) => {
+  const [email, setEmail] = React.useState('')
+  const [password, setPassword] = React.useState('')
+
+  const handleSubmit = React.useCallback(async () => {
+    const result = await firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .catch((error) => {
+        console.log('Error', error)
+        return
+      })
+
+    if (!result) {
+      return
+    }
+
+    console.log('Result', result)
+    navigation.navigate('Memo')
+  }, [email, password, navigation])
+
   return (
     <Container>
       <Title>メンバー登録</Title>
-      <TextField value="Email" />
-      <TextField value="Password" />
+      <TextField
+        value={email}
+        onChangeText={setEmail}
+        autoCapitalize="none"
+        placeholder="Email"
+      />
+      <TextField
+        value={password}
+        onChangeText={setPassword}
+        autoCapitalize="none"
+        placeholder="Password"
+        secureTextEntry={true}
+      />
       <SignupButton
         activeOpacity={0.4}
         underlayColor="#c70f66"
-        onPress={() => {}}>
+        onPress={handleSubmit}>
         <SignupButtonTitle>登録する</SignupButtonTitle>
       </SignupButton>
     </Container>
