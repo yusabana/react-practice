@@ -1,4 +1,3 @@
-import { Text } from 'react-native'
 import * as React from 'react'
 import styled from 'styled-components/native'
 import { CircleButton } from '../elements/CircleButton'
@@ -35,6 +34,11 @@ const Body = styled.View`
   flex: 1;
 `
 
+const BodyText = styled.Text`
+  line-height: 24px;
+  font-size: 16px;
+`
+
 const StyledCircleButton = styled(CircleButton)`
   top: 75px;
   bottom: auto;
@@ -60,7 +64,7 @@ const MemoDetailScreen: React.FC<Props> = ({ navigation, route }) => {
       </Header>
 
       <Body>
-        <Text>{memo.body}</Text>
+        <BodyText>{memo.body}</BodyText>
       </Body>
 
       <StyledCircleButton color="light" onPress={handleEditButton}>

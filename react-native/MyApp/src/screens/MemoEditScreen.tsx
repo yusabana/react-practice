@@ -4,6 +4,7 @@ import { CircleButton } from '../elements/CircleButton'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { RootStackParamList } from 'App'
 import { RouteProp } from '@react-navigation/native'
+import firebase from 'firebase'
 
 const Container = styled.View`
   flex: 1;
@@ -16,21 +17,40 @@ const EditInput = styled.TextInput`
   font-size: 16px;
 `
 
-const StyledCircleButton = styled(CircleButton)``
+const StyledCircleButton = styled(CircleButton)`
+  top: 8px;
+`
 
 type Props = {
   navigation: StackNavigationProp<RootStackParamList, 'MemoEdit'>
   route: RouteProp<RootStackParamList, 'MemoEdit'>
 }
 
-const MemoEditScreen: React.FC<Props> = ({ navigation }) => {
-  const [body, setBody] = React.useState('あいうえお')
+const MemoEditScreen: React.FC<Props> = ({ navigation, route }) => {
+  const { id, body } = route.params.memo
+  const [editBody, setEditBody] = React.useState(body)
+  const handlePress = async () => {
+    const db = firebase.firestore()
+    const { currentUser } = firebase.auth()
+
+    const docRef = db.collection(`users/${currentUser!.uid}/memos`).doc(id)
+
+    try {
+      const updatedDocRef = await docRef.update({
+        body: editBody,
+      })
+      console.log('UPDATED', docRef, updatedDocRef)
+      navigation.goBack()
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <Container>
-      <EditInput value={body} multiline={true} onChangeText={setBody} />
+      <EditInput value={editBody} multiline={true} onChangeText={setEditBody} />
 
-      <StyledCircleButton onPress={navigation.goBack} color="light">
+      <StyledCircleButton onPress={handlePress} color="light">
         D
       </StyledCircleButton>
     </Container>
