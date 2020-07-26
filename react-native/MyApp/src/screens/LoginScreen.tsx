@@ -6,6 +6,7 @@ import { RootStackParamList } from 'App'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { RouteProp, CommonActions } from '@react-navigation/native'
 import {} from 'react-native-gesture-handler'
+import { Loading } from '../elements/Loading'
 
 const Container = styled.View`
   flex: 1;
@@ -94,32 +95,36 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
   }
 
   return (
-    <Container>
-      <Title>ログイン</Title>
-      <TextField
-        value={email}
-        onChangeText={setEmail}
-        autoCapitalize="none"
-        placeholder="Email Address"
-      />
-      <TextField
-        value={password}
-        onChangeText={setPassword}
-        autoCapitalize="none"
-        placeholder="Password"
-        secureTextEntry={true}
-      />
-      <LoginButtonContainer
-        activeOpacity={0.9}
-        underlayColor="#c70f66"
-        onPress={handleLogin}>
-        <LoginButtonText>ログインする</LoginButtonText>
-      </LoginButtonContainer>
+    <>
+      {false && <Loading />}
 
-      <SignupContainer onPress={handleRegister}>
-        <SignupText>会員登録する</SignupText>
-      </SignupContainer>
-    </Container>
+      <Container>
+        <Title>ログイン</Title>
+        <TextField
+          value={email}
+          onChangeText={setEmail}
+          autoCapitalize="none"
+          placeholder="Email Address"
+        />
+        <TextField
+          value={password}
+          onChangeText={setPassword}
+          autoCapitalize="none"
+          placeholder="Password"
+          secureTextEntry={true}
+        />
+        <LoginButtonContainer
+          activeOpacity={0.9}
+          underlayColor="#c70f66"
+          onPress={handleLogin}>
+          <LoginButtonText>ログインする</LoginButtonText>
+        </LoginButtonContainer>
+
+        <SignupContainer onPress={handleRegister}>
+          <SignupText>会員登録する</SignupText>
+        </SignupContainer>
+      </Container>
+    </>
   )
 }
 
