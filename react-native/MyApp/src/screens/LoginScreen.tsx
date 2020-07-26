@@ -1,10 +1,11 @@
 import * as React from 'react'
 import styled from 'styled-components/native'
-import { TouchableHighlight, Text } from 'react-native'
+import { TouchableOpacity, TouchableHighlight, Text } from 'react-native'
 import firebase from 'firebase'
 import { RootStackParamList } from 'App'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { RouteProp, CommonActions } from '@react-navigation/native'
+import {} from 'react-native-gesture-handler'
 
 const Container = styled.View`
   flex: 1;
@@ -26,7 +27,7 @@ const TextField = styled.TextInput`
   border-width: 0.5px;
 `
 
-const LoginButton = styled(TouchableHighlight)`
+const LoginButtonContainer = styled(TouchableHighlight)`
   margin-top: 16px;
   background-color: #e31676;
   height: 48px;
@@ -37,9 +38,18 @@ const LoginButton = styled(TouchableHighlight)`
   align-self: center;
 `
 
-const LoginButtonTitle = styled(Text)`
+const LoginButtonText = styled(Text)`
   color: #fff;
   font-size: 20px;
+`
+
+const SignupContainer = styled(TouchableOpacity)`
+  margin-top: 20px;
+  align-self: center;
+`
+
+const SignupText = styled(Text)`
+  font-size: 16px;
 `
 
 type Props = {
@@ -79,6 +89,10 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
     }
   }
 
+  const handleRegister = () => {
+    navigation.navigate('Signup')
+  }
+
   return (
     <Container>
       <Title>ログイン</Title>
@@ -95,12 +109,16 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
         placeholder="Password"
         secureTextEntry={true}
       />
-      <LoginButton
+      <LoginButtonContainer
         activeOpacity={0.9}
         underlayColor="#c70f66"
         onPress={handleLogin}>
-        <LoginButtonTitle>ログインする</LoginButtonTitle>
-      </LoginButton>
+        <LoginButtonText>ログインする</LoginButtonText>
+      </LoginButtonContainer>
+
+      <SignupContainer onPress={handleRegister}>
+        <SignupText>会員登録する</SignupText>
+      </SignupContainer>
     </Container>
   )
 }
