@@ -51,8 +51,8 @@ type Props = {
  * TODO: 未ログイン状態のときにアクセスを制限するしょり
  */
 const LoginScreen: React.FC<Props> = ({ navigation }) => {
-  const [email, setEmail] = React.useState('')
-  const [password, setPassword] = React.useState('')
+  const [email, setEmail] = React.useState('user3@example.com')
+  const [password, setPassword] = React.useState('password')
 
   const handleLogin = async () => {
     // try-asyncパターン
