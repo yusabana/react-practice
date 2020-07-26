@@ -42,11 +42,11 @@ const renderListItem: (
     <TouchableHighlight
       key={id}
       onPress={() => {
-        navigation.navigate('MemoDetail', { memo: memo })
+        navigation.navigate('MemoDetail', { memo })
       }}>
       <MemoListItem>
         <MemoTitle>{body}</MemoTitle>
-        <MemoDate>{createdAt}</MemoDate>
+        <MemoDate>{createdAt.format('YYYY-MM-DD HH:mm')}</MemoDate>
       </MemoListItem>
     </TouchableHighlight>
   )

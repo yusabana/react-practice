@@ -46,17 +46,17 @@ type Props = {
 }
 
 const MemoDetailScreen: React.FC<Props> = ({ navigation, route }) => {
-  const handleEditButton = React.useCallback(() => {
-    navigation.navigate('MemoEdit')
-  }, [navigation])
-
   const { memo } = route.params
+
+  const handleEditButton = React.useCallback(() => {
+    navigation.navigate('MemoEdit', { memo })
+  }, [navigation, memo])
 
   return (
     <Container>
       <Header>
         <HeaderTitle>メモ詳細</HeaderTitle>
-        <HeaderDate>{memo.createdAt}</HeaderDate>
+        <HeaderDate>{memo.createdAt.format('YYYY-MM-DD HH:mm')}</HeaderDate>
       </Header>
 
       <Body>

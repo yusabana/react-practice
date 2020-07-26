@@ -1,5 +1,7 @@
+import dayjs from 'dayjs'
+
 export type Memo = {
   id: string
   body: string
-  createdAt: number // unixtimeの数値
+  createdAt: dayjs.Dayjs
 }

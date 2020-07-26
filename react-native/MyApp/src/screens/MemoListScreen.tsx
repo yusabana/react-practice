@@ -1,3 +1,4 @@
+import dayjs from 'dayjs'
 import * as React from 'react'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { RouteProp } from '@react-navigation/native'
@@ -25,7 +26,11 @@ const useMemoListData = () => {
         let newMemoList: Memo[] = []
         snapshot.forEach((doc) => {
           const { body, createdAt } = doc.data()
-          newMemoList.push({ id: doc.id, createdAt: createdAt.seconds, body })
+
+          const timestamp = createdAt.seconds * 1000
+          const createdAtObj: dayjs.Dayjs = dayjs(timestamp).locale('ja')
+
+          newMemoList.push({ id: doc.id, createdAt: createdAtObj, body })
         })
 
         setMemoList(newMemoList)
