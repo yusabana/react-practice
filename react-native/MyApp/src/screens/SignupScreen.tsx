@@ -59,13 +59,12 @@ const SignupScreen: React.FC<Props> = ({ navigation }) => {
         console.log('Error', error)
         return
       })
-
-    if (!result) {
+    if (!result || !result.user) {
       return
     }
 
     console.log('Result', result)
-    navigation.navigate('Memo')
+    navigation.navigate('Memo', { currentUser: result.user })
   }, [email, password, navigation])
 
   return (

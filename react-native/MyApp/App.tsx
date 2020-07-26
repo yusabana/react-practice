@@ -35,7 +35,7 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig)
 
 export type RootStackParamList = {
-  Memo: undefined
+  Memo: { currentUser: firebase.User }
   MemoDetail: undefined
   MemoEdit: undefined
   Login: undefined
@@ -48,6 +48,7 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator
         initialRouteName="Login"
+        // initialRouteName="Signup"
         screenOptions={{
           headerTitle: (props) => <AppBar {...props} />,
           headerStyle: { backgroundColor: '#265366' },

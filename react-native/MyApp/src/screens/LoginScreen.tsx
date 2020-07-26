@@ -57,9 +57,12 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
       const result = await firebase
         .auth()
         .signInWithEmailAndPassword(email, password)
+      if (!result.user) {
+        throw new Error('userが存在しない')
+      }
 
       console.log('Success', result, email, password)
-      navigation.navigate('Memo')
+      navigation.navigate('Memo', { currentUser: result.user })
     } catch (error) {
       console.log('Error', error, email, password)
       return

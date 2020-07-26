@@ -11,14 +11,18 @@ type Props = {
   route: RouteProp<RootStackParamList, 'Memo'>
 }
 
-const MemoListScreen: React.FC<Props> = ({ navigation }) => {
+const MemoListScreen: React.FC<Props> = ({ navigation, route }) => {
   const handleNew = () => {
-    const db = firebase.firestore()
-    console.log('new', db)
+    const params = route.params
 
-    db.collection('memos')
+    console.log('PARAMSで', params)
+
+    const db = firebase.firestore()
+    const uid = params.currentUser.uid
+
+    db.collection(`users/${uid}/memos`)
       .add({
-        body: 'test memo',
+        body: 'test memo2222',
         createdOn: '2020-07-26',
       })
       .then((docRef) => {
