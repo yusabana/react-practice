@@ -4,7 +4,7 @@ import { TouchableHighlight, Text } from 'react-native'
 import firebase from 'firebase'
 import { RootStackParamList } from 'App'
 import { StackNavigationProp } from '@react-navigation/stack'
-import { RouteProp } from '@react-navigation/native'
+import { RouteProp, CommonActions } from '@react-navigation/native'
 
 const Container = styled.View`
   flex: 1;
@@ -65,7 +65,14 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
       }
 
       console.log('Success', result, email, password)
-      navigation.navigate('Memo')
+
+      // ログイン後にnavigationをリセットしつつ、履歴の開始をMemoとする
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [{ name: 'Memo' }],
+        }),
+      )
     } catch (error) {
       console.log('Error', error, email, password)
       return
