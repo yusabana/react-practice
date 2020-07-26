@@ -27,7 +27,10 @@ type Props = {
 }
 
 const MemoEditScreen: React.FC<Props> = ({ navigation, route }) => {
-  const { id, body } = route.params.memo
+  const {
+    memo: { id, body, createdAt },
+    returnMemo,
+  } = route.params
   const [editBody, setEditBody] = React.useState(body)
   const handlePress = async () => {
     const db = firebase.firestore()
@@ -40,6 +43,7 @@ const MemoEditScreen: React.FC<Props> = ({ navigation, route }) => {
         body: editBody,
       })
       console.log('UPDATED', docRef, updatedDocRef)
+      returnMemo({ id, body: editBody, createdAt }) // detail側のMemoを更新する
       navigation.goBack()
     } catch (error) {
       console.log(error)

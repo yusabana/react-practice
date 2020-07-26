@@ -20,24 +20,20 @@ const useMemoListData = () => {
     const { currentUser } = firebase.auth()
     const db = firebase.firestore()
 
-    db.collection(`users/${currentUser!.uid}/memos`)
-      .get()
-      .then((snapshot) => {
-        let newMemoList: Memo[] = []
-        snapshot.forEach((doc) => {
-          const { body, createdAt } = doc.data()
+    db.collection(`users/${currentUser!.uid}/memos`).onSnapshot((snapshot) => {
+      let newMemoList: Memo[] = []
 
-          const timestamp = createdAt.seconds * 1000
-          const createdAtObj: dayjs.Dayjs = dayjs(timestamp).locale('ja')
+      snapshot.forEach((doc) => {
+        const { body, createdAt } = doc.data()
 
-          newMemoList.push({ id: doc.id, createdAt: createdAtObj, body })
-        })
+        const timestamp = createdAt.seconds * 1000
+        const createdAtObj: dayjs.Dayjs = dayjs(timestamp).locale('ja')
 
-        setMemoList(newMemoList)
+        newMemoList.push({ id: doc.id, createdAt: createdAtObj, body })
       })
-      .catch((error) => {
-        console.log(error)
-      })
+
+      setMemoList(newMemoList)
+    })
   }, [])
 
   return { memoList }

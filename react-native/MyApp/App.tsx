@@ -39,7 +39,7 @@ firebase.initializeApp(firebaseConfig)
 export type RootStackParamList = {
   Memo: undefined
   MemoDetail: { memo: Memo }
-  MemoEdit: { memo: Memo }
+  MemoEdit: { memo: Memo; returnMemo: (m: Memo) => void }
   MemoCreate: undefined
   Login: undefined
   Signup: undefined

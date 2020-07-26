@@ -4,6 +4,7 @@ import { CircleButton } from '../elements/CircleButton'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { RootStackParamList } from 'App'
 import { RouteProp } from '@react-navigation/native'
+import { Memo } from 'src/types'
 
 const Container = styled.View`
   flex: 1;
@@ -50,10 +51,14 @@ type Props = {
 }
 
 const MemoDetailScreen: React.FC<Props> = ({ navigation, route }) => {
-  const { memo } = route.params
+  // detailで扱うmemoの情報と更新時のコールバック(returnMemo)を定義
+  const [memo, setMemo] = React.useState(route.params.memo)
+  const returnMemo = (m: Memo) => {
+    setMemo(m)
+  }
 
   const handleEditButton = React.useCallback(() => {
-    navigation.navigate('MemoEdit', { memo })
+    navigation.navigate('MemoEdit', { memo, returnMemo })
   }, [navigation, memo])
 
   return (
