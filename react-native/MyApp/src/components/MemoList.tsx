@@ -4,6 +4,7 @@ import { TouchableHighlight } from 'react-native'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { RootStackParamList } from 'App'
 import { FlatList } from 'react-native-gesture-handler'
+import { Memo } from 'src/types'
 
 const StyledMemoList = styled.View`
   flex: 1;
@@ -26,20 +27,14 @@ const MemoDate = styled.Text`
   color: #a2a2a2;
 `
 
-export type MemoListItem = {
-  id: string
-  body: string
-  createdAt: Date
-}
-
 type Props = {
   navigation: StackNavigationProp<RootStackParamList, 'Memo'>
-  memoList: MemoListItem[]
+  memoList: Memo[]
 }
 
 const renderListItem: (
   navigation: StackNavigationProp<RootStackParamList, 'Memo'>,
-  memo: MemoListItem,
+  memo: Memo,
 ) => React.ReactElement = (navigation, memo) => {
   const { id, body, createdAt } = memo
 
@@ -47,7 +42,7 @@ const renderListItem: (
     <TouchableHighlight
       key={id}
       onPress={() => {
-        navigation.navigate('MemoDetail')
+        navigation.navigate('MemoDetail', { memo: memo })
       }}>
       <MemoListItem>
         <MemoTitle>{body}</MemoTitle>

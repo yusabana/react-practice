@@ -2,9 +2,10 @@ import * as React from 'react'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { RouteProp } from '@react-navigation/native'
 import { RootStackParamList } from 'App'
-import { MemoList, MemoListItem } from '../components/MemoList'
+import { MemoList } from '../components/MemoList'
 import { CircleButton } from '../elements/CircleButton'
 import firebase from 'firebase'
+import { Memo } from 'src/types'
 
 type Props = {
   navigation: StackNavigationProp<RootStackParamList, 'Memo'>
@@ -12,7 +13,7 @@ type Props = {
 }
 
 const useMemoListData = () => {
-  const [memoList, setMemoList] = React.useState<MemoListItem[]>([])
+  const [memoList, setMemoList] = React.useState<Memo[]>([])
 
   React.useEffect(() => {
     const { currentUser } = firebase.auth()
@@ -21,7 +22,7 @@ const useMemoListData = () => {
     db.collection(`users/${currentUser!.uid}/memos`)
       .get()
       .then((snapshot) => {
-        let newMemoList: MemoListItem[] = []
+        let newMemoList: Memo[] = []
         snapshot.forEach((doc) => {
           const { body, createdAt } = doc.data()
           newMemoList.push({ id: doc.id, createdAt: createdAt.seconds, body })

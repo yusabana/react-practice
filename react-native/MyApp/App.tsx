@@ -22,6 +22,7 @@ import { SignupScreen } from './src/screens/SignupScreen'
 import { MemoCreateScreen } from './src/screens/MemoCreateScreen'
 import ENV from './env.json'
 import 'firebase/firestore'
+import { Memo } from 'src/types'
 
 const firebaseConfig = {
   apiKey: ENV.FIREBASE_API_KEY,
@@ -37,7 +38,7 @@ firebase.initializeApp(firebaseConfig)
 
 export type RootStackParamList = {
   Memo: undefined
-  MemoDetail: undefined
+  MemoDetail: { memo: Memo }
   MemoEdit: undefined
   MemoCreate: undefined
   Login: undefined

@@ -45,20 +45,22 @@ type Props = {
   route: RouteProp<RootStackParamList, 'MemoDetail'>
 }
 
-const MemoDetailScreen: React.FC<Props> = ({ navigation }) => {
+const MemoDetailScreen: React.FC<Props> = ({ navigation, route }) => {
   const handleEditButton = React.useCallback(() => {
     navigation.navigate('MemoEdit')
   }, [navigation])
 
+  const { memo } = route.params
+
   return (
     <Container>
       <Header>
-        <HeaderTitle>講座のアイデア</HeaderTitle>
-        <HeaderDate>Yeasterday</HeaderDate>
+        <HeaderTitle>メモ詳細</HeaderTitle>
+        <HeaderDate>{memo.createdAt}</HeaderDate>
       </Header>
 
       <Body>
-        <Text>講座のアイデアです。本文です。 すよね</Text>
+        <Text>{memo.body}</Text>
       </Body>
 
       <StyledCircleButton color="light" onPress={handleEditButton}>
