@@ -25,6 +25,10 @@ const useMemoListData = () => {
 
       snapshot.forEach((doc) => {
         const { body, createdAt } = doc.data()
+        // NOTE: 新規作成したときにリストに戻る際createdAtが取れてない場合がある
+        if (!createdAt) {
+          return
+        }
 
         const timestamp = createdAt.seconds * 1000
         const createdAtObj: dayjs.Dayjs = dayjs(timestamp).locale('ja')
