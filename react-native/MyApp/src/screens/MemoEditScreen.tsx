@@ -19,8 +19,8 @@ const EditInput = styled.TextInput`
 const StyledCircleButton = styled(CircleButton)``
 
 type Props = {
-  navigation: StackNavigationProp<RootStackParamList, 'Login'>
-  route: RouteProp<RootStackParamList, 'Login'>
+  navigation: StackNavigationProp<RootStackParamList, 'MemoEdit'>
+  route: RouteProp<RootStackParamList, 'MemoEdit'>
 }
 
 const MemoEditScreen: React.FC<Props> = ({ navigation }) => {

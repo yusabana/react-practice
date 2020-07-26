@@ -19,6 +19,7 @@ import { MemoListScreen } from './src/screens/MemoListScreen'
 import { MemoDetailScreen } from './src/screens/MemoDetailScreen'
 import { MemoEditScreen } from './src/screens/MemoEditScreen'
 import { SignupScreen } from './src/screens/SignupScreen'
+import { MemoCreateScreen } from './src/screens/MemoCreateScreen'
 import ENV from './env.json'
 import 'firebase/firestore'
 
@@ -38,6 +39,7 @@ export type RootStackParamList = {
   Memo: { currentUser: firebase.User }
   MemoDetail: undefined
   MemoEdit: undefined
+  MemoCreate: { uid: string }
   Login: undefined
   Signup: undefined
 }
@@ -59,6 +61,7 @@ const App = () => {
         <Stack.Screen name="Memo" component={MemoListScreen} />
         <Stack.Screen name="MemoDetail" component={MemoDetailScreen} />
         <Stack.Screen name="MemoEdit" component={MemoEditScreen} />
+        <Stack.Screen name="MemoCreate" component={MemoCreateScreen} />
         <Stack.Screen name="Signup" component={SignupScreen} />
       </Stack.Navigator>
     </NavigationContainer>
