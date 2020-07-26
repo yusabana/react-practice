@@ -64,7 +64,7 @@ const SignupScreen: React.FC<Props> = ({ navigation }) => {
     }
 
     console.log('Result', result)
-    navigation.navigate('Memo', { currentUser: result.user })
+    navigation.navigate('Memo')
   }, [email, password, navigation])
 
   return (

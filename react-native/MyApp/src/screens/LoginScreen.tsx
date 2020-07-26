@@ -47,6 +47,9 @@ type Props = {
   route: RouteProp<RootStackParamList, 'Login'>
 }
 
+/**
+ * TODO: 未ログイン状態のときにアクセスを制限するしょり
+ */
 const LoginScreen: React.FC<Props> = ({ navigation }) => {
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
@@ -62,7 +65,7 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
       }
 
       console.log('Success', result, email, password)
-      navigation.navigate('Memo', { currentUser: result.user })
+      navigation.navigate('Memo')
     } catch (error) {
       console.log('Error', error, email, password)
       return

@@ -36,10 +36,10 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig)
 
 export type RootStackParamList = {
-  Memo: { currentUser: firebase.User }
+  Memo: undefined
   MemoDetail: undefined
   MemoEdit: undefined
-  MemoCreate: { uid: string }
+  MemoCreate: undefined
   Login: undefined
   Signup: undefined
 }

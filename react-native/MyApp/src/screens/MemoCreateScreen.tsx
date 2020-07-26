@@ -26,12 +26,15 @@ type Props = {
   route: RouteProp<RootStackParamList, 'MemoCreate'>
 }
 
-const MemoCreateScreen: React.FC<Props> = ({ navigation, route }) => {
+const MemoCreateScreen: React.FC<Props> = ({ navigation /*, route*/ }) => {
   const [body, setBody] = React.useState('')
 
   const handlePress = () => {
     const db = firebase.firestore()
-    const uid = route.params.uid
+    // firebase.auth()からcurrentUserが取得できる
+    // const uid = route.params.uid
+    const { currentUser } = firebase.auth()
+    const uid = currentUser!.uid
 
     db.collection(`users/${uid}/memos`)
       .add({

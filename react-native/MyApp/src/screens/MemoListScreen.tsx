@@ -10,11 +10,10 @@ type Props = {
   route: RouteProp<RootStackParamList, 'Memo'>
 }
 
-const MemoListScreen: React.FC<Props> = ({ navigation, route }) => {
+const MemoListScreen: React.FC<Props> = ({ navigation /*, route*/ }) => {
   const handleNew = () => {
-    const params = route.params
-
-    navigation.navigate('MemoCreate', { uid: params.currentUser.uid })
+    // const params = route.params
+    navigation.navigate('MemoCreate')
   }
 
   return (
